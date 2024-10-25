@@ -34,10 +34,15 @@ func main() {
 	//a := [...]int{5, 4: 1, 0, 2: 3, 2, 1: 4}
 	//fmt.Println(a)
 
-	result := 1.0 / 10.0
-	for range [...]int{8: 0} {
-		result += 1.0 / 10.0
-	}
+	//result := 1.0 / 10.0
+	//for range [...]int{8: 0} {
+	//	result += 1.0 / 10.0
+	//}
+	//
+	//fmt.Printf("%.60f\n", result)
 
-	fmt.Printf("%.60f\n", result)
+	fmt.Printf("%b\n", 69)
+	fmt.Printf("%010b\n", 69)
+	fmt.Printf("%010b\n", 70)
+	fmt.Printf("%010b\n", 420)
 }
