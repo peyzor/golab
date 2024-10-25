@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"math"
-	"unsafe"
 )
 
 func main() {
@@ -63,25 +62,51 @@ func main() {
 	//b = 255
 	//fmt.Printf("%08b = %d\n", b, b)
 
-	fmt.Println("int: ", math.MinInt, math.MaxInt)
-	fmt.Println("int8: ", math.MinInt8, math.MaxInt8)
-	fmt.Println("uint32 :", 0, math.MaxUint32)
-	fmt.Println("uint64 :", 0, uint64(math.MaxUint64))
-	fmt.Println("float32:", math.SmallestNonzeroFloat32, math.MaxFloat32)
-	fmt.Println("float64:", math.SmallestNonzeroFloat64, math.MaxFloat64)
+	//fmt.Println("int: ", math.MinInt, math.MaxInt)
+	//fmt.Println("int8: ", math.MinInt8, math.MaxInt8)
+	//fmt.Println("uint32 :", 0, math.MaxUint32)
+	//fmt.Println("uint64 :", 0, uint64(math.MaxUint64))
+	//fmt.Println("float32:", math.SmallestNonzeroFloat32, math.MaxFloat32)
+	//fmt.Println("float64:", math.SmallestNonzeroFloat64, math.MaxFloat64)
 	// memory costs
-	fmt.Println("int    :", unsafe.Sizeof(int(1)), "bytes")
-	fmt.Println("int8   :", unsafe.Sizeof(int8(1)), "bytes")
-	fmt.Println("int16  :", unsafe.Sizeof(int16(1)), "bytes")
-	fmt.Println("int32  :", unsafe.Sizeof(int32(1)), "bytes")
-	fmt.Println("int64  :", unsafe.Sizeof(int64(1)), "bytes")
+	//fmt.Println("int    :", unsafe.Sizeof(int(1)), "bytes")
+	//fmt.Println("int8   :", unsafe.Sizeof(int8(1)), "bytes")
+	//fmt.Println("int16  :", unsafe.Sizeof(int16(1)), "bytes")
+	//fmt.Println("int32  :", unsafe.Sizeof(int32(1)), "bytes")
+	//fmt.Println("int64  :", unsafe.Sizeof(int64(1)), "bytes")
+	//
+	//fmt.Println("uint   :", unsafe.Sizeof(uint(1)), "bytes")
+	//fmt.Println("uint8  :", unsafe.Sizeof(uint8(1)), "bytes")
+	//fmt.Println("uint16 :", unsafe.Sizeof(uint16(1)), "bytes")
+	//fmt.Println("uint32 :", unsafe.Sizeof(uint32(1)), "bytes")
+	//fmt.Println("uint64 :", unsafe.Sizeof(uint64(1)), "bytes")
+	//
+	//fmt.Println("float32:", unsafe.Sizeof(float32(1)), "bytes")
+	//fmt.Println("float64:", unsafe.Sizeof(float64(1)), "bytes")
 
-	fmt.Println("uint   :", unsafe.Sizeof(uint(1)), "bytes")
-	fmt.Println("uint8  :", unsafe.Sizeof(uint8(1)), "bytes")
-	fmt.Println("uint16 :", unsafe.Sizeof(uint16(1)), "bytes")
-	fmt.Println("uint32 :", unsafe.Sizeof(uint32(1)), "bytes")
-	fmt.Println("uint64 :", unsafe.Sizeof(uint64(1)), "bytes")
+	//fmt.Println(int8(math.MaxInt8 + 1)) // overflows
+	var n int8 = math.MaxInt8
 
-	fmt.Println("float32:", unsafe.Sizeof(float32(1)), "bytes")
-	fmt.Println("float64:", unsafe.Sizeof(float64(1)), "bytes")
+	// wrap arounds to its negative maximum
+	fmt.Println("max int8     :", n)   // 127
+	fmt.Println("max int8 + 1 :", n+1) // -128
+
+	// wrap arounds to its positive maximum
+	n = math.MinInt8
+	fmt.Println("min int8     :", n)   // -128
+	fmt.Println("min int8 - 1 :", n-1) // 127
+
+	// wrap arounds to its maximum
+	var un uint8
+
+	fmt.Println("max uint8    :", un)   // 0
+	fmt.Println("max uint8 - 1:", un-1) // 255
+
+	// wrap around to its minimum
+	un = math.MaxUint8
+	fmt.Println("max uint8 + 1:", un+1) // 0
+
+	// floats goes to infinity when overflowed
+	f := float32(math.MaxFloat32)
+	fmt.Println("max float    :", f*1.2)
 }
