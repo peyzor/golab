@@ -1,9 +1,6 @@
 package main
 
-import (
-	"fmt"
-	"strings"
-)
+import "fmt"
 
 func main() {
 	//Builder Pattern usage
@@ -215,8 +212,21 @@ func main() {
 	//	fmt.Printf("%d ", x)
 	//}
 
-	words := strings.Fields("Montag Dienstag Mittwoch Donnerstag Freitag Samstag Sonntag")
-	for x, y := range words {
-		fmt.Println(x+1, y)
+	//words := strings.Fields("Montag Dienstag Mittwoch Donnerstag Freitag Samstag Sonntag")
+	//for x, y := range words {
+	//	fmt.Println(x+1, y)
+	//}
+
+outer:
+	for i := 1; i < 10; i++ {
+		for j := i; j < 10; j++ {
+			if i == 5 && j == 5 {
+				break outer
+				// also works with continue
+			}
+
+			fmt.Printf("%d ", j)
+		}
+		fmt.Println()
 	}
 }
