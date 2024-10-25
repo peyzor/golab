@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
 	//Builder Pattern usage
@@ -183,32 +186,37 @@ func main() {
 	//	fmt.Println("good night")
 	//}
 
-	for i := 1; i < 10; i++ {
-		fmt.Printf("%d ", i)
-	}
-	fmt.Println()
+	//for i := 1; i < 10; i++ {
+	//	fmt.Printf("%d ", i)
+	//}
+	//fmt.Println()
+	//
+	//j := 1
+	//for {
+	//	if j >= 10 {
+	//		break
+	//	}
+	//
+	//	fmt.Printf("%d ", j)
+	//	j++
+	//}
+	//fmt.Println()
+	//
+	//k := 1
+	//for k < 10 {
+	//	fmt.Printf("%d ", k)
+	//
+	//	k++
+	//}
+	//fmt.Println()
+	//
+	//list := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
+	//for _, x := range list {
+	//	fmt.Printf("%d ", x)
+	//}
 
-	j := 1
-	for {
-		if j >= 10 {
-			break
-		}
-
-		fmt.Printf("%d ", j)
-		j++
-	}
-	fmt.Println()
-
-	k := 1
-	for k < 10 {
-		fmt.Printf("%d ", k)
-
-		k++
-	}
-	fmt.Println()
-
-	list := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
-	for _, x := range list {
-		fmt.Printf("%d ", x)
+	words := strings.Fields("Montag Dienstag Mittwoch Donnerstag Freitag Samstag Sonntag")
+	for x, y := range words {
+		fmt.Println(x+1, y)
 	}
 }
