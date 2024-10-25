@@ -1,9 +1,6 @@
 package main
 
-import (
-	"fmt"
-	"strconv"
-)
+import "fmt"
 
 func main() {
 	//Builder Pattern usage
@@ -49,9 +46,16 @@ func main() {
 	//fmt.Printf("%010b\n", 70)
 	//fmt.Printf("%010b\n", 420)
 
-	i, _ := strconv.ParseInt("1000101", 2, 8)
-	fmt.Println(int8(i))
-	e, _ := strconv.Atoi("69")
-	fmt.Println(e)
+	//i, _ := strconv.ParseInt("1000101", 2, 8)
+	//fmt.Println(int8(i))
+	//e, _ := strconv.Atoi("69")
+	//fmt.Println(e)
 
+	// type byte = uint8
+	var b byte
+	b = 0
+	fmt.Printf("%08b = %d\n", b, b)
+
+	b = 255
+	fmt.Printf("%08b = %d\n", b, b)
 }
