@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
 	//Builder Pattern usage
@@ -108,25 +111,27 @@ func main() {
 	//fmt.Println("max float    :", f*1.2)
 
 	// iota expression
-	const (
-		monday = iota + 1
-		tuesday
-		wednesday
-		thursday
-		friday
-		saturday
-		sunday
-	)
-
-	fmt.Println(monday, tuesday, wednesday, thursday, friday, saturday, sunday)
+	//const (
+	//	monday = iota + 1
+	//	tuesday
+	//	wednesday
+	//	thursday
+	//	friday
+	//	saturday
+	//	sunday
+	//)
+	//
+	//fmt.Println(monday, tuesday, wednesday, thursday, friday, saturday, sunday)
 
 	// blank identifier usage in iota
-	const (
-		xd = -(5 + iota)
-		_
-		xdd
-		x3d
-	)
+	//const (
+	//	xd = -(5 + iota)
+	//	_
+	//	xdd
+	//	x3d
+	//)
+	//
+	//fmt.Println(xd, xdd, x3d)
 
-	fmt.Println(xd, xdd, x3d)
+	fmt.Println(strings.Repeat("-", 25))
 }
