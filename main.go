@@ -2,7 +2,10 @@ package main
 
 import (
 	"fmt"
+	s "github.com/inancgumus/prettyslice"
 )
+
+//import s "github.com/inancgumus/prettyslice"
 
 func main() {
 	//Builder Pattern usage
@@ -240,33 +243,105 @@ func main() {
 	//		goto loop
 	//	}
 
-	// # in printf acts like __repr__ in python
-	zero := [0]byte{}
-	fmt.Printf("%#v\n", zero)
+	//// # in printf acts like __repr__ in python
+	//zero := [0]byte{}
+	//fmt.Printf("%#v\n", zero)
+	//
+	//var names [3]string
+	//names[0] = "Peyman"
+	//names[1] = "Ari"
+	//names[2] = "Thusnelda"
+	//fmt.Printf("%#v\n", names)
+	//fmt.Printf("%v\n", names)
+	//
+	//books := [4]string{
+	//	"Kafka's Revenge",
+	//	"Stay Golden",
+	//}
+	//fmt.Printf("%#v\n", books)
+	//
+	//// but slices can only be compared to nil
+	//x := [3]int{1, 2, 3}
+	//y := [3]int{1, 2, 3}
+	//fmt.Printf("%t\n", x == y)
+	//
+	//// can not use [...][...]int it's not possible for the compiler to infer
+	//structure := [...][3]int{
+	//	{1, 2, 3},
+	//	{4, 5, 6},
+	//}
+	//
+	//fmt.Printf("%#v\n", structure)
 
-	var names [3]string
-	names[0] = "Peyman"
-	names[1] = "Ari"
-	names[2] = "Thusnelda"
-	fmt.Printf("%#v\n", names)
-	fmt.Printf("%v\n", names)
+	//// array's length is part of its type but not for slices
+	//var nums []int
+	//// notice that len and cap are usable even though the slice is uninitialized
+	//fmt.Printf("%#v, %d, %d\n", nums, len(nums), cap(nums))
+	//fmt.Println(nums == nil)
+	//
+	//noms := make([]int, 0, 10)
+	//fmt.Printf("%#v, %d, %d\n", noms, len(noms), cap(noms))
+	//fmt.Println(noms == nil)
+	//// it's not nil but still can't access anything because length is 0
+	////fmt.Println(noms[0])
 
-	books := [4]string{
-		"Kafka's Revenge",
-		"Stay Golden",
-	}
-	fmt.Printf("%#v\n", books)
+	//nums := []int{1, 2, 3}
+	//s.Show("nums", nums)
+	//
+	//_ = append(nums, 4)
+	//s.Show("nums", nums)
+	//
+	//nums = append(nums, 4)
+	//s.Show("nums", nums)
+	//
+	//nums = append(nums, 5)
+	//s.Show("nums", nums)
+	//
+	//nums = append(nums, 6)
+	//s.Show("nums", nums)
+	//
+	//nums = append(nums, 7)
+	//s.Show("nums", nums)
+	//
+	//nums = []int{1, 2, 3}
+	//s.Show("nums", nums)
+	//add := []int{4, 5, 6, 7, 8, 9, 10, 11}
+	//nums = append(nums, add...)
+	//s.Show("nums", nums)
 
-	// but slices can only be compared to nil
-	x := [3]int{1, 2, 3}
-	y := [3]int{1, 2, 3}
-	fmt.Printf("%t\n", x == y)
+	//msg := []byte{'h', 'e', 'l', 'l', 'o'}
+	//s.Show("msg", msg)
+	//
+	//s.Show("msg[0:1]", msg[0:1])
+	//s.Show("msg[0:2]", msg[0:2])
+	//s.Show("msg[0:3]", msg[0:3])
+	//s.Show("msg[0:4]", msg[0:4])
+	//s.Show("msg[0:5]", msg[0:5])
+	//
+	//// default indexes
+	//s.Show("msg[0:]", msg[0:])
+	//s.Show("msg[:5]", msg[:5])
+	//s.Show("msg[:]", msg[:])
+	//
+	//// error: beyond
+	//// s.Show("msg", msg)[:6]
+	//
+	//s.Show("msg[1:4]", msg[1:4])
+	//
+	//s.Show("msg[1:5]", msg[1:5])
+	//s.Show("msg[1:]", msg[1:])
+	//
+	//s.Show("append(msg)", append(msg[:4], '!'))
 
-	// can not use [...][...]int it's not possible for the compiler to infer
-	structure := [...][3]int{
-		{1, 2, 3},
-		{4, 5, 6},
-	}
+	evens := []int{2, 4}
+	odds := []int{3, 5, 7}
 
-	fmt.Printf("%#v\n", structure)
+	s.Show("evens [before]", evens)
+	s.Show("odds  [before]", odds)
+
+	N := copy(evens, odds)
+	fmt.Printf("%d element(s) are copied.\n", N)
+
+	s.Show("evens [after]", evens)
+	s.Show("odds  [after]", odds)
 }
