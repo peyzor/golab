@@ -217,16 +217,24 @@ func main() {
 	//	fmt.Println(x+1, y)
 	//}
 
-outer:
-	for i := 1; i < 10; i++ {
-		for j := i; j < 10; j++ {
-			if i == 5 && j == 5 {
-				break outer
-				// also works with continue
-			}
+	//outer:
+	//	for i := 1; i < 10; i++ {
+	//		for j := i; j < 10; j++ {
+	//			if i == 5 && j == 5 {
+	//				break outer
+	//				// also works with continue
+	//			}
+	//
+	//			fmt.Printf("%d ", j)
+	//		}
+	//		fmt.Println()
+	//	}
 
-			fmt.Printf("%d ", j)
-		}
-		fmt.Println()
+	i := 1
+loop:
+	if i < 10 {
+		fmt.Printf("%d ", i)
+		i++
+		goto loop
 	}
 }
