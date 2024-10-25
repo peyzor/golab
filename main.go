@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	s "github.com/inancgumus/prettyslice"
+	"unsafe"
 )
 
 //import s "github.com/inancgumus/prettyslice"
@@ -333,15 +333,40 @@ func main() {
 	//
 	//s.Show("append(msg)", append(msg[:4], '!'))
 
-	evens := []int{2, 4}
-	odds := []int{3, 5, 7}
+	//evens := []int{2, 4}
+	//odds := []int{3, 5, 7}
+	//
+	//s.Show("evens [before]", evens)
+	//s.Show("odds  [before]", odds)
+	//
+	//N := copy(evens, odds)
+	//fmt.Printf("%d element(s) are copied.\n", N)
+	//
+	//s.Show("evens [after]", evens)
+	//s.Show("odds  [after]", odds)
 
-	s.Show("evens [before]", evens)
-	s.Show("odds  [before]", odds)
+	dump("hello")
 
-	N := copy(evens, odds)
-	fmt.Printf("%d element(s) are copied.\n", N)
+	str1 := []byte("groß")
+	fmt.Println(string(str1))
+	fmt.Println(unsafe.Sizeof(str1))
+	fmt.Println(len(str1))
+	dump(string(str1))
 
-	s.Show("evens [after]", evens)
-	s.Show("odds  [after]", odds)
+	str2 := []rune("groß")
+	fmt.Println(string(str2))
+	fmt.Println(unsafe.Sizeof(str2))
+	fmt.Println(len(str2))
+	dump(string(str2))
+}
+
+type StringHeader struct {
+	// points to a backing array's item
+	pointer uintptr // where it starts
+	length  int     // where it ends
+}
+
+func dump(s string) {
+	ptr := *(*StringHeader)(unsafe.Pointer(&s))
+	fmt.Printf("%q: %+v\n", s, ptr)
 }
