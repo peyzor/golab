@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	//Builder Pattern usage
@@ -230,11 +232,41 @@ func main() {
 	//		fmt.Println()
 	//	}
 
-	i := 1
-loop:
-	if i < 10 {
-		fmt.Printf("%d ", i)
-		i++
-		goto loop
+	//	i := 1
+	//loop:
+	//	if i < 10 {
+	//		fmt.Printf("%d ", i)
+	//		i++
+	//		goto loop
+	//	}
+
+	// # in printf acts like __repr__ in python
+	zero := [0]byte{}
+	fmt.Printf("%#v\n", zero)
+
+	var names [3]string
+	names[0] = "Peyman"
+	names[1] = "Ari"
+	names[2] = "Thusnelda"
+	fmt.Printf("%#v\n", names)
+	fmt.Printf("%v\n", names)
+
+	books := [4]string{
+		"Kafka's Revenge",
+		"Stay Golden",
 	}
+	fmt.Printf("%#v\n", books)
+
+	// but slices can only be compared to nil
+	x := [3]int{1, 2, 3}
+	y := [3]int{1, 2, 3}
+	fmt.Printf("%t\n", x == y)
+
+	// can not use [...][...]int it's not possible for the compiler to infer
+	structure := [...][3]int{
+		{1, 2, 3},
+		{4, 5, 6},
+	}
+
+	fmt.Printf("%#v\n", structure)
 }
