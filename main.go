@@ -2,7 +2,10 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"math/rand"
+	"os"
+	"strconv"
+	"time"
 )
 
 func main() {
@@ -133,5 +136,56 @@ func main() {
 	//
 	//fmt.Println(xd, xdd, x3d)
 
-	fmt.Println(strings.Repeat("-", 25))
+	//fmt.Println(strings.Repeat("-", 25))
+
+	city := os.Args[1]
+
+	switch city {
+	case "Paris", "Lyon":
+		fmt.Println("Really")
+		fmt.Println("France")
+	case "Tokyo":
+		fmt.Println("Now")
+		fmt.Println("We're talking")
+	default:
+		fmt.Println("Where?")
+	}
+
+	num := os.Args[1]
+	i, _ := strconv.Atoi(num)
+	switch {
+	case i > 100:
+		fmt.Println("greater than 100")
+		fallthrough
+	case i > 0:
+		fmt.Println("positive")
+	case i < -10:
+		fmt.Println("too small")
+	default:
+		fmt.Println("xd")
+	}
+
+	source := rand.NewSource(time.Now().UnixNano())
+	rng := rand.New(source)
+	start := 5
+	end := 10
+	switch x := rng.Intn(end-start+1) + start; {
+	case x > 7:
+		fmt.Println(x)
+		fmt.Println("greater than 7")
+	case x <= 7:
+		fmt.Println(x)
+		fmt.Println("less than or equals 7")
+	}
+
+	switch h := time.Now().Hour(); {
+	case h >= 18: // 18 to 23
+		fmt.Println("good evening")
+	case h >= 12: // 12 to 18
+		fmt.Println("good afternoon")
+	case h >= 6: // 6 to 12
+		fmt.Println("good morning")
+	default: // 0 to 5
+		fmt.Println("good night")
+	}
 }
