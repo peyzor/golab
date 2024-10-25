@@ -1,9 +1,6 @@
 package main
 
-import (
-	"fmt"
-	"math"
-)
+import "fmt"
 
 func main() {
 	//Builder Pattern usage
@@ -85,28 +82,51 @@ func main() {
 	//fmt.Println("float64:", unsafe.Sizeof(float64(1)), "bytes")
 
 	//fmt.Println(int8(math.MaxInt8 + 1)) // overflows
-	var n int8 = math.MaxInt8
+	//var n int8 = math.MaxInt8
 
 	// wrap arounds to its negative maximum
-	fmt.Println("max int8     :", n)   // 127
-	fmt.Println("max int8 + 1 :", n+1) // -128
+	//fmt.Println("max int8     :", n)   // 127
+	//fmt.Println("max int8 + 1 :", n+1) // -128
 
 	// wrap arounds to its positive maximum
-	n = math.MinInt8
-	fmt.Println("min int8     :", n)   // -128
-	fmt.Println("min int8 - 1 :", n-1) // 127
+	//n = math.MinInt8
+	//fmt.Println("min int8     :", n)   // -128
+	//fmt.Println("min int8 - 1 :", n-1) // 127
 
 	// wrap arounds to its maximum
-	var un uint8
-
-	fmt.Println("max uint8    :", un)   // 0
-	fmt.Println("max uint8 - 1:", un-1) // 255
+	//var un uint8
+	//
+	//fmt.Println("max uint8    :", un)   // 0
+	//fmt.Println("max uint8 - 1:", un-1) // 255
 
 	// wrap around to its minimum
-	un = math.MaxUint8
-	fmt.Println("max uint8 + 1:", un+1) // 0
+	//un = math.MaxUint8
+	//fmt.Println("max uint8 + 1:", un+1) // 0
 
 	// floats goes to infinity when overflowed
-	f := float32(math.MaxFloat32)
-	fmt.Println("max float    :", f*1.2)
+	//f := float32(math.MaxFloat32)
+	//fmt.Println("max float    :", f*1.2)
+
+	// iota expression
+	const (
+		monday = iota + 1
+		tuesday
+		wednesday
+		thursday
+		friday
+		saturday
+		sunday
+	)
+
+	fmt.Println(monday, tuesday, wednesday, thursday, friday, saturday, sunday)
+
+	// blank identifier usage in iota
+	const (
+		xd = -(5 + iota)
+		_
+		xdd
+		x3d
+	)
+
+	fmt.Println(xd, xdd, x3d)
 }
