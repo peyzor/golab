@@ -1,10 +1,6 @@
 package main
 
-import (
-	"bufio"
-	"fmt"
-	"os"
-)
+import "fmt"
 
 func main() {
 	//// In their uninitialized forms they are (nil)
@@ -72,17 +68,68 @@ func main() {
 	//
 	//fmt.Printf("%#v\n", myMap)
 
-	in := bufio.NewScanner(os.Stdin)
+	//in := bufio.NewScanner(os.Stdin)
+	//
+	//var lines int
+	//
+	//for in.Scan() {
+	//	input := in.Text()
+	//	fmt.Printf("line no %d: %s\n", lines, input)
+	//	lines++
+	//}
+	//
+	//if err := in.Err(); err != nil {
+	//	fmt.Println(err)
+	//}
 
-	var lines int
-
-	for in.Scan() {
-		input := in.Text()
-		fmt.Printf("line no %d: %s\n", lines, input)
-		lines++
+	type person struct {
+		name, lastname string
+		age            int
 	}
 
-	if err := in.Err(); err != nil {
-		fmt.Println(err)
+	picasso := person{
+		name:     "Pablo",
+		lastname: "Picasso",
+		age:      91,
 	}
+
+	var freud person
+	freud.name = "Sigmund"
+	freud.lastname = "Freud"
+	freud.age = 83
+
+	fmt.Printf("%+v\n%+v\n", picasso, freud)
+
+	type song struct {
+		title, artist string
+	}
+
+	type playlist struct {
+		genre string
+		songs []song
+	}
+
+	song1 := song{title: "wonderwall", artist: "oasis"}
+	song2 := song{title: "super sonic", artist: "oasis"}
+
+	songs := []song{song1, song2}
+	myPlaylist := playlist{genre: "xd", songs: songs}
+	fmt.Printf("%+v\n", myPlaylist)
+
+	type text struct {
+		title string
+		words int
+	}
+
+	type book struct {
+		text // embedding
+		isbn string
+	}
+
+	moby := book{
+		text: text{title: "moby dick", words: 206052}, // Initialize the embedded struct
+		isbn: "102030",
+	}
+	fmt.Printf("%+v", moby)
+	fmt.Println(moby.title) // this works because of embedding
 }
