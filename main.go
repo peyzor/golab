@@ -132,4 +132,18 @@ func main() {
 	}
 	fmt.Printf("%+v", moby)
 	fmt.Println(moby.title) // this works because of embedding
+
+	// no need to specify book{} for every item in the list
+	myBooks := []book{
+		{
+			text: text{title: "xd", words: 69},
+			isbn: "holy mother of god",
+		},
+		{
+			text: text{title: "xdd", words: 70},
+			isbn: "holy mother of jesus",
+		},
+	}
+
+	fmt.Printf("%+v\n", myBooks)
 }
