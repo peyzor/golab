@@ -55,4 +55,21 @@ func main() {
 	// notice the capacity here
 	s = s[2:]
 	printSlice(s)
+
+	// a nil slice has length and capacity of 0 and has no underlying array
+	var myNilSlice []int
+	fmt.Println(myNilSlice, len(myNilSlice), cap(myNilSlice), myNilSlice == nil)
+
+	// the make function allocates a zeroed array and return a slice that refers to that array
+	mySlice := make([]int, 0, 5)
+	fmt.Println(mySlice, len(mySlice), cap(mySlice), mySlice == nil)
+
+	// the default is zero for lower bound and the length of the slice for the high bound
+	mySlice = mySlice[:]
+	fmt.Println(mySlice, len(mySlice), cap(mySlice), mySlice == nil)
+
+	// but we can go beyond the length of the slice and into the underlying array
+	// notice that we can't go beyond this unlike python it is a runtime error
+	mySlice = mySlice[:cap(mySlice)]
+	fmt.Println(mySlice, len(mySlice), cap(mySlice), mySlice == nil)
 }
