@@ -81,20 +81,67 @@ func goroutines() {
 	}
 	qFib <- 0
 
-	tick := time.Tick(100 * time.Millisecond)
-	boom := time.After(500 * time.Millisecond)
+	//tick := time.Tick(100 * time.Millisecond)
+	//boom := time.After(500 * time.Millisecond)
 
 	// the default case in select is run if no other case is ready
+	//for {
+	//	select {
+	//	case <-tick:
+	//		fmt.Println("tick.")
+	//	case <-boom:
+	//		fmt.Println("BOOM!")
+	//		return
+	//	default:
+	//		fmt.Println("    .")
+	//		time.Sleep(50 * time.Millisecond)
+	//	}
+	//}
+
+	chx1 := make(chan string)
+	chx2 := make(chan string)
+
+	go func() {
+		chx1 <- "Hello"
+	}()
+
+	go func() {
+		chx2 <- "World"
+	}()
+
+	// we use select on its own without an enclosing "for" when we only need to process one thing
+	// and then move on
+	select {
+	case msg1 := <-chx1:
+		fmt.Println(msg1)
+	case msg2 := <-chx2:
+		fmt.Println(msg2)
+	case <-time.After(1 * time.Nanosecond):
+		fmt.Println("timed out!")
+	}
+
+	go func() {
+		for {
+			time.Sleep(100 * time.Millisecond)
+			chx1 <- "Ping"
+		}
+	}()
+
+	go func() {
+		for {
+			time.Sleep(200 * time.Millisecond)
+			chx2 <- "Pong"
+		}
+	}()
+
 	for {
 		select {
-		case <-tick:
-			fmt.Println("tick.")
-		case <-boom:
-			fmt.Println("BOOM!")
-			return
-		default:
-			fmt.Println("    .")
-			time.Sleep(50 * time.Millisecond)
+		case msg1 := <-chx1:
+			fmt.Println(msg1)
+		case msg2 := <-chx2:
+			fmt.Println(msg2)
+		case <-time.After(100 * time.Millisecond):
+			fmt.Println("Timeout! xd")
 		}
 	}
 }
