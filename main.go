@@ -2,6 +2,15 @@ package main
 
 import "fmt"
 
+type Person struct {
+	name string
+	age  int
+}
+
+func (p Person) String() string {
+	return fmt.Sprintf("and the names is: %s with age: %d", p.name, p.age)
+}
+
 func main() {
 	//var i interface{}
 	// the empty interface can hold any value of any type
@@ -35,6 +44,9 @@ func main() {
 	case string:
 		fmt.Printf("it is string: %s\n", v)
 	default:
-		fmt.Printf("(%v, %[1]T)", v)
+		fmt.Printf("(%v, %[1]T)\n", v)
 	}
+
+	a := Person{"Arthur Morgan", 44}
+	fmt.Println(a)
 }
