@@ -3,8 +3,17 @@ package main
 import "fmt"
 
 type Vertex struct {
-	x int
-	y int
+	x, y float64
+}
+
+func (v *Vertex) Scale(f float64) {
+	v.x = v.x * f
+	v.y = v.y * f
+}
+
+func ScaleFunc(v *Vertex, f float64) {
+	v.x = v.x * f
+	v.y = v.y * f
 }
 
 func printSlice(s []int) {
@@ -12,12 +21,22 @@ func printSlice(s []int) {
 }
 
 func main() {
-	// struct fields can be accessed through a struct pointer
+	// there are 2 special behaviours here for convenience
+	// 1. struct fields can be accessed through a struct pointer
 	v := Vertex{1, 2}
 	p := &v
 	p.x = 10
-	//(*p).x = 10 // the language automatically does this for us
+	//(*p).x = 10 // the language automatically does this for us (automatic dereferencing)
 	fmt.Printf("%+v\n", p)
+
+	// 2. pointer receivers take either value or a pointer
+	v = Vertex{1.5, 2.25}
+	v.Scale(5)
+	//(&v).Scale(5) // the language automatically does this for us (automatic referencing)
+	fmt.Printf("%+v\n", v)
+	//ScaleFunc(v, 5)
+	ScaleFunc(&v, 5)
+	fmt.Printf("%+v\n", v)
 
 	names := [4]string{
 		"John",
