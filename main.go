@@ -64,4 +64,10 @@ func main() {
 			break
 		}
 	}
+
+	src := []int{1, 2, 3, 4, 5}
+	dst := make([]int, 3)
+	n := copy(dst, src)
+	fmt.Println("Copied elements: ", n)
+	fmt.Println("Destination slice ", dst)
 }
