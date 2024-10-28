@@ -72,4 +72,9 @@ func main() {
 	// notice that we can't go beyond this unlike python it is a runtime error
 	mySlice = mySlice[:cap(mySlice)]
 	fmt.Println(mySlice, len(mySlice), cap(mySlice), mySlice == nil)
+
+	f := fibonacci()
+	for i := 1; i < 10; i++ {
+		fmt.Println(f())
+	}
 }
