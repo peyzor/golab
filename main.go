@@ -23,6 +23,18 @@ func main() {
 	s, ok := i.(string)
 	fmt.Printf("(%v, %[1]T), %t\n", s, ok)
 
-	v := i.(string) // panic
-	fmt.Printf("(%v, %[1]T)\n", v)
+	//v := i.(string) // panic
+	//fmt.Printf("(%v, %[1]T)\n", v)
+
+	// type switches allow several type assertions in series
+	var w any
+	w = int64(1)
+	switch v := w.(type) {
+	case int:
+		fmt.Printf("it is int: %d\n", v)
+	case string:
+		fmt.Printf("it is string: %s\n", v)
+	default:
+		fmt.Printf("(%v, %[1]T)", v)
+	}
 }
