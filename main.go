@@ -11,6 +11,12 @@ func (v *Vertex) Scale(f float64) {
 	v.y = v.y * f
 }
 
+func (v Vertex) ScaleV(f float64) Vertex {
+	v.x = v.x * f
+	v.y = v.y * f
+	return v
+}
+
 func ScaleFunc(v *Vertex, f float64) {
 	v.x = v.x * f
 	v.y = v.y * f
@@ -21,7 +27,7 @@ func printSlice(s []int) {
 }
 
 func main() {
-	// there are 2 special behaviours here for convenience
+	// there are 2 types of special behaviours here for convenience
 	// 1. struct fields can be accessed through a struct pointer
 	v := Vertex{1, 2}
 	p := &v
@@ -29,7 +35,7 @@ func main() {
 	//(*p).x = 10 // the language automatically does this for us (automatic dereferencing)
 	fmt.Printf("%+v\n", p)
 
-	// 2. pointer receivers take either value or a pointer
+	// 2.1 pointer receivers take either value or a pointer
 	v = Vertex{1.5, 2.25}
 	v.Scale(5)
 	//(&v).Scale(5) // the language automatically does this for us (automatic referencing)
@@ -37,6 +43,11 @@ func main() {
 	//ScaleFunc(v, 5)
 	ScaleFunc(&v, 5)
 	fmt.Printf("%+v\n", v)
+	// 2.2 functions that take a value argument
+	r := &Vertex{1, 2}
+	result := r.ScaleV(5)
+	//result := (*r).ScaleV(5) // the language automatically does this for us (automatic dereferencing)
+	fmt.Printf("%+v\n", result)
 
 	names := [4]string{
 		"John",
