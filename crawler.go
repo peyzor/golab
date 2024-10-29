@@ -30,16 +30,16 @@ func (f fakeFetcher) Fetch(url string) (string, []string, error) {
 	return "", nil, fmt.Errorf("not found: %s", url)
 }
 
-func Crawl(url string, depth int, fetcher Fetcher, exit chan bool) {
+func Crawl(url string, depth int, fetcher Fetcher, wg *sync.WaitGroup, r chan string) {
+	defer wg.Done()
+
 	if depth <= 0 {
-		exit <- true
 		return
 	}
 
 	cnt.mux.Lock()
 	_, ok := cnt.v[url]
 	if ok {
-		exit <- true
 		cnt.mux.Unlock()
 		return
 	}
@@ -50,27 +50,26 @@ func Crawl(url string, depth int, fetcher Fetcher, exit chan bool) {
 	body, urls, err := fetcher.Fetch(url)
 	if err != nil {
 		fmt.Println(err)
-		exit <- true
 		return
 	}
 
 	fmt.Printf("found: %s %q\n", url, body)
 
-	e := make(chan bool)
+	var wg_ sync.WaitGroup
 	for _, u := range urls {
-		go Crawl(u, depth-1, fetcher, e)
+		wg_.Add(1)
+		go Crawl(u, depth-1, fetcher, &wg_, r)
 	}
-
-	for i := 0; i < len(urls); i++ {
-		<-e
-	}
-	exit <- true
+	wg_.Wait()
+	return
 }
 
 func runCrawler() {
-	exit := make(chan bool)
-	go Crawl("https://golang.org/", 4, fetcher, exit)
-	<-exit
+	result := make(chan string)
+	var wg sync.WaitGroup
+	wg.Add(1)
+	go Crawl("https://golang.org/", 4, fetcher, &wg, result)
+	wg.Wait()
 }
 
 var fetcher = fakeFetcher{
